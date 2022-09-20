@@ -1,0 +1,293 @@
+{
+	"info": {
+		"_postman_id": "a871b959-0966-49ae-ae1d-53ee66924f51",
+		"name": "ContagemJWT3Requisicoes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4157995"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"tokenApiContagem\", \"\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Retorno OK Login\", function() {\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.json;\r",
+							"    pm.response.to.be.withBody;\r",
+							"});\r",
+							"\r",
+							"var result = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Verificar se token foi gerado\", function() {\r",
+							"    pm.expect(result.accessToken).not.undefined;\r",
+							"    pm.expect(result.accessToken).not.null;\r",
+							"    pm.collectionVariables.set(\"tokenApiContagem\", result.accessToken)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userID\": \"{{userIdApiContagem}}\",\r\n  \"password\": \"{{passwordApiContagem}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contagem Req 01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Retorno OK Contagem\", function() {\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.json;\r",
+							"    pm.response.to.be.withBody;\r",
+							"});\r",
+							"\r",
+							"var result = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Verificar se o valor de contagem foi gerado\", function() {\r",
+							"    pm.expect(result.valorAtual).not.undefined;\r",
+							"    pm.expect(result.valorAtual).not.null;\r",
+							"    pm.expect(result.valorAtual).greaterThan(0);\r",
+							"    console.log(\"Valor atual do contador: \" + result.valorAtual);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"Aguardando 1s...\");\r",
+							"setTimeout(() => {}, 1000);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenApiContagem}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Contador",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Contador"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contagem Req 02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Retorno OK Contagem\", function() {\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.json;\r",
+							"    pm.response.to.be.withBody;\r",
+							"});\r",
+							"\r",
+							"var result = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Verificar se o valor de contagem foi gerado\", function() {\r",
+							"    pm.expect(result.valorAtual).not.undefined;\r",
+							"    pm.expect(result.valorAtual).not.null;\r",
+							"    pm.expect(result.valorAtual).greaterThan(0);\r",
+							"    console.log(\"Valor atual do contador: \" + result.valorAtual);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"Aguardando 4s...\");\r",
+							"setTimeout(() => {}, 4000);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenApiContagem}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Contador",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Contador"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contagem Req 03",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Retorno OK Contagem\", function() {\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.json;\r",
+							"    pm.response.to.be.withBody;\r",
+							"});\r",
+							"\r",
+							"var result = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Verificar se o valor de contagem foi gerado\", function() {\r",
+							"    pm.expect(result.valorAtual).not.undefined;\r",
+							"    pm.expect(result.valorAtual).not.null;\r",
+							"    pm.expect(result.valorAtual).greaterThan(0);\r",
+							"    console.log(\"Valor atual do contador: \" + result.valorAtual);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"Aguardando 7s...\");\r",
+							"setTimeout(() => {}, 7000);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenApiContagem}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Contador",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Contador"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "tokenApiContagem",
+			"value": "valor_token"
+		},
+		{
+			"key": "userIdApiContagem",
+			"value": "usuario"
+		},
+		{
+			"key": "passwordApiContagem",
+			"value": "password"
+		}
+	]
+}
